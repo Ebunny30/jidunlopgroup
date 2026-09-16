@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>J.I. Dunlop Group</title>
+<meta name="description" content="J.I. Dunlop Group is a privately held company that owns and operates a portfolio of businesses for the long term.">
+
+<!-- Favicon: same file as the header logo -->
+<link rel="icon" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+
+<!-- Fonts - Source Serif 4 (headings) + Inter (body). The only external dependency. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+/* ============================================================
+   BRAND TOKENS
+   The red and the off-white are sampled straight out of logo.png.
+   Change --brand here and it updates across the whole site.
+   ============================================================ */
+:root{
+  --brand:        #C02806;   /* logo red */
+  --brand-dark:   #991F04;   /* hover / active */
+  --bg:           #F0EFED;   /* logo backdrop */
+  --surface:      #FAF9F8;   /* alternating sections + contact cards */
+  --ink:          #1B1917;
+  --muted:        #5C5650;
+  --line:         #DDDAD5;
+  --placeholder:  #D6D3CE;   /* grey block behind the team photos */
+  --wrap:         1120px;
+  --radius:       14px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{
+  scroll-behavior:smooth;      /* smooth scroll on nav links */
+  scroll-padding-top:92px;     /* keeps sections clear of the sticky header */
+  -webkit-text-size-adjust:100%;
+}
+@media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:1rem;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{ max-width:100%; display:block; }
+a{ color:var(--brand); }
+
+h1,h2,h3{
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-weight:600;
+  line-height:1.2;
+  letter-spacing:-.01em;
+  margin:0;
+}
+
+.wrap{ width:100%; max-width:var(--wrap); margin-inline:auto; padding-inline:22px; }
+
+/* ============================================================
+   HEADER - sticky, logo left, nav right
+   ============================================================ */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(240,239,237,.88);
+  backdrop-filter:saturate(180%) blur(10px);
+  border-bottom:1px solid transparent;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.site-header.is-scrolled{
+  border-bottom-color:var(--line);
+  box-shadow:0 1px 14px rgba(27,25,23,.05);
+}
+.header-inner{ display:flex; align-items:center; justify-content:space-between; gap:18px; height:64px; }
+.header-logo{ display:block; flex:none; }
+.header-logo img{ width:118px; height:auto; }
+
+.site-nav{ display:flex; align-items:center; gap:26px; }
+.site-nav a{
+  color:var(--muted); text-decoration:none;
+  font-size:.9rem; font-weight:500;
+  transition:color .15s ease;
+}
+.site-nav a:hover,.site-nav a:focus-visible{ color:var(--brand); }
+/* The text links fold away on small screens so the bar never crowds.
+   The Contact button always stays. */
+.site-nav .nav-link{ display:none; }
+.site-nav .nav-cta{
+  color:#fff; background:var(--brand);
+  padding:.5rem 1rem; border-radius:999px; font-weight:600;
+}
+.site-nav .nav-cta:hover,.site-nav .nav-cta:focus-visible{ background:var(--brand-dark); color:#fff; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{ padding:64px 0 56px; text-align:center; }
+.eyebrow{
+  margin:0 0 26px;
+  font-size:.72rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--brand);
+}
+.hero-title{ margin:0; display:flex; flex-direction:column; align-items:center; gap:22px; }
+.hero-logo{ width:min(100%,420px); height:auto; }
+.hero-name{
+  font-family:"Inter",sans-serif;
+  font-size:.74rem; font-weight:600; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--muted);
+}
+.hero-tagline{
+  font-family:"Source Serif 4",Georgia,serif;
+  font-size:1.3rem; line-height:1.45;
+  max-width:34ch; margin:26px auto 0;
+}
+.hero-actions{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:32px; }
+
+.btn{
+  display:inline-block; text-decoration:none;
+  padding:.8rem 1.6rem; border-radius:999px;
+  font-size:.92rem; font-weight:600;
+  transition:background .15s ease, color .15s ease, border-color .15s ease;
+}
+.btn-primary{ background:var(--brand); color:#fff; }
+.btn-primary:hover,.btn-primary:focus-visible{ background:var(--brand-dark); }
+.btn-ghost{ border:1px solid var(--line); color:var(--ink); }
+.btn-ghost:hover,.btn-ghost:focus-visible{ border-color:var(--brand); color:var(--brand); }
+
+/* ============================================================
+   SECTION FURNITURE
+   ============================================================ */
+.section{ padding:56px 0; }
+.section-alt{ background:var(--surface); border-block:1px solid var(--line); }
+
+.section-label{
+  margin:0 0 14px; padding-top:16px;
+  border-top:2px solid var(--brand);        /* brand divider above every heading */
+  display:inline-block;
+  font-size:.72rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--brand);
+}
+.section-title{ font-size:1.85rem; margin:0 0 26px; max-width:22ch; }
+
+.prose{ max-width:62ch; }
+.prose p{ margin:0 0 1.15em; color:var(--muted); }
+.prose p:last-child{ margin-bottom:0; }
+
+/* ============================================================
+   OUR COMPANIES
+   ============================================================ */
+.company-grid{ display:grid; gap:20px; }
+.company-card{
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:30px 26px;
+}
+.company-logo{ width:190px; height:auto; margin-bottom:22px; }
+.company-card h3{ font-size:1.25rem; margin:0 0 4px; }
+.company-role{
+  margin:0 0 14px;
+  font-size:.74rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--brand);
+}
+.company-card p:last-child{ margin:0; color:var(--muted); font-size:.96rem; }
+
+/* ============================================================
+   LEADERSHIP
+   ============================================================ */
+.team-grid{ display:grid; gap:26px; }
+
+/* The grey block IS the wrapper. The photo sits on top and covers it.
+   If the file is missing, the photo is hidden (see the script at the
+   bottom) and the block shows through with the initials - so the card
+   still looks deliberate and never shows a broken image. */
+.headshot{
+  position:relative;
+  aspect-ratio:4/5;                    /* portrait - the standard headshot shape */
+  background:var(--placeholder);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-bottom:16px;
+}
+.headshot::after{
+  content:attr(data-initials);
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:"Source Serif 4",Georgia,serif;
+  font-size:2.6rem; letter-spacing:.06em;
+  color:rgba(27,25,23,.22);
+}
+.headshot img{
+  position:absolute; inset:0; z-index:1;
+  width:100%; height:100%;
+  object-fit:cover;                    /* fills the card, never squashed */
+}
+.headshot img.is-missing{ display:none; }
+
+/* ---- Framing each headshot ------------------------------------------
+   object-fit:cover shows a 4:5 slice of the photo; these lines choose
+   WHICH slice, vertically. One line per person, tune them independently:
+
+       LOWER number  = more of the top of the photo = face sits LOWER
+       HIGHER number = face sits HIGHER
+       50% is dead centre.  Nudge in steps of 5.
+   --------------------------------------------------------------------- */
+.headshot img[src="jonah.jpg"]{ object-position:50% 50%; }
+.headshot img[src="james.jpg"]{ object-position:50% 25%; }
+.headshot img[src="tudor.jpg"]{ object-position:50% 15%; }
+
+.team-card h3{ font-size:1.1rem; margin:0 0 2px; }
+.team-role{
+  margin:0;
+  font-size:.74rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--brand);
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-list{ list-style:none; margin:26px 0 0; padding:0; display:grid; gap:18px; }
+.contact-item{
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px 24px;
+}
+.contact-label{
+  display:block; margin-bottom:6px;
+  font-size:.72rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--muted);
+}
+.contact-value{
+  font-family:"Source Serif 4",Georgia,serif;
+  font-size:1.3rem; color:var(--brand); text-decoration:none;
+  overflow-wrap:anywhere;
+}
+.contact-value:hover,.contact-value:focus-visible{ color:var(--brand-dark); text-decoration:underline; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer{ border-top:1px solid var(--line); padding:30px 0; }
+.footer-inner{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; }
+.footer-inner p{ margin:0; font-size:.85rem; color:var(--muted); }
+.footer-logo img{ width:104px; height:auto; }
+
+/* ============================================================
+   RESPONSIVE - written mobile-first; these are the step-ups
+   ============================================================ */
+@media (min-width:620px){
+  .site-nav .nav-link{ display:inline; }
+  .team-grid{ grid-template-columns:repeat(3,1fr); gap:22px; }
+  .contact-list{ grid-template-columns:repeat(2,1fr); }
+}
+@media (min-width:860px){
+  .header-inner{ height:76px; }
+  .header-logo img{ width:140px; }
+  .hero{ padding:92px 0 80px; }
+  .hero-tagline{ font-size:1.6rem; }
+  .section{ padding:88px 0; }
+  .section-title{ font-size:2.35rem; }
+  .prose{ font-size:1.06rem; }
+  .company-grid{ grid-template-columns:repeat(2,1fr); gap:26px; }
+  .company-card{ padding:38px 34px; }
+  .team-grid{ gap:30px; }
+}
+
+/* Visible keyboard focus everywhere */
+a:focus-visible{ outline:2px solid var(--brand); outline-offset:3px; border-radius:4px; }
+</style>
+</head>
+
+<body id="top">
+
+<!-- ==================== HEADER ==================== -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="header-logo" href="#top" aria-label="J.I. Dunlop Group - back to top">
+      <img src="logo.png" alt="">
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#companies">Companies</a>
+      <a class="nav-link" href="#leadership">Leadership</a>
+      <a class="nav-cta" href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">A privately held group</p>
+      <h1 class="hero-title">
+        <img class="hero-logo" src="logo.png" alt="J.I. Dunlop Group">
+        <span class="hero-name">J.I. Dunlop Group</span>
+      </h1>
+      <p class="hero-tagline">Building and holding businesses for the long term.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#companies">Our companies</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <p class="section-label">About</p>
+      <h2 class="section-title">A group built to last.</h2>
+      <div class="prose">
+        <p>J.I. Dunlop Group is a privately held company that owns and operates a portfolio of
+           businesses. We back each one with the capital, the structure and the patience it needs
+           to be run properly &mdash; and we hold what we build.</p>
+        <p>Each company in the group keeps its own name, its own team and its own way of working.
+           What they share is a standard &mdash; do the work properly, keep the promises you make,
+           and build something that still stands up in ten years. The group takes care of what is
+           better done once: finance, governance, planning and the long view, so that each business
+           can spend its attention on its customers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== OUR COMPANIES ==================== -->
+  <section class="section section-alt" id="companies">
+    <div class="wrap">
+      <p class="section-label">Our companies</p>
+      <h2 class="section-title">One standard across the group.</h2>
+      <div class="company-grid">
+
+        <article class="company-card">
+          <img class="company-logo" src="logo-studio.png" alt="J.I. Dunlop Studio">
+          <h3>J.I. Dunlop Studio</h3>
+          <p class="company-role">Video &amp; content production</p>
+          <p>J.I. Dunlop Studio produces video and written content for businesses that need their
+             work seen properly. The studio runs projects end to end &mdash; direction, filming,
+             editing and delivery &mdash; from a single brand film through to ongoing content
+             programmes for companies that publish week after week. Clients range from independent
+             operators to established firms, and the standard of the work does not change between
+             them.</p>
+        </article>
+
+        <article class="company-card">
+          <img class="company-logo" src="logo-partners.png" alt="J.I. Dunlop Partners">
+          <h3>J.I. Dunlop Partners</h3>
+          <p class="company-role">Holding &amp; investments</p>
+          <p>J.I. Dunlop Partners is the group&rsquo;s holding and investment arm. It holds the
+             group&rsquo;s interests in its operating companies and manages capital alongside them
+             &mdash; the group&rsquo;s own, and that of outside investors who back the same
+             long-term approach. Partners decides how capital is allocated across the portfolio and
+             carries the reporting and governance that sit behind it. The mandate is a demanding
+             one: understand every position properly, and hold it long enough for the work to
+             show.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LEADERSHIP ====================
+       TEAM PHOTOS - drop three files into this same folder:
+
+           jonah.jpg     Jonah Dunlop
+           james.jpg     James Macdougall
+           tudor.jpg     Tudor Panghe
+
+       The cards are 4:5 portrait. Around 1000 x 1250 px is ideal, but any
+       portrait photo works - they are cropped to fit with object-fit:cover,
+       so nothing is ever squashed. Keep the names lowercase with the .jpg
+       extension exactly as written above (GitHub Pages is case-sensitive,
+       so Jonah.JPG will NOT work).
+
+       To move a face up or down in its card, edit that person's
+       object-position line in the CSS above - see the note there.
+
+       Until a file is added, that card shows a clean grey block with the
+       person's initials. No broken image, and nothing in this file to
+       change when you add the photos.
+       ======================================================== -->
+  <section class="section" id="leadership">
+    <div class="wrap">
+      <p class="section-label">Leadership</p>
+      <h2 class="section-title">The people behind the group.</h2>
+      <div class="team-grid">
+
+        <article class="team-card">
+          <div class="headshot" data-initials="JD"><img src="jonah.jpg" alt=""></div>
+          <h3>Jonah Dunlop</h3>
+          <p class="team-role">Chief Executive Officer</p>
+        </article>
+
+        <article class="team-card">
+          <div class="headshot" data-initials="JM"><img src="james.jpg" alt=""></div>
+          <h3>James Macdougall</h3>
+          <p class="team-role">Marketing Director</p>
+        </article>
+
+        <article class="team-card">
+          <div class="headshot" data-initials="TP"><img src="tudor.jpg" alt=""></div>
+          <h3>Tudor Panghe</h3>
+          <p class="team-role">Finance Director</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section class="section section-alt" id="contact">
+    <div class="wrap">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Speak to the group.</h2>
+      <div class="prose">
+        <p>General enquiries, investment proposals and press all come to the same place, and reach
+           the right desk quickly.</p>
+      </div>
+      <ul class="contact-list">
+        <li class="contact-item">
+          <span class="contact-label">Telephone</span>
+          <a class="contact-value" href="tel:+447856947567">07856 947567</a>
+        </li>
+        <li class="contact-item">
+          <span class="contact-label">Email</span>
+          <a class="contact-value" href="mailto:contact@jidunlopgroup.com">contact@jidunlopgroup.com</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <a class="footer-logo" href="#top" aria-label="J.I. Dunlop Group - back to top">
+      <img src="logo.png" alt="">
+    </a>
+    <p>&copy; <span id="year">2026</span> J.I. Dunlop Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* Footer year - always current, never needs editing. */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* Team photos: if jonah.jpg / james.jpg / tudor.jpg is not in the folder yet,
+   hide the broken image so the grey placeholder block shows instead.
+   Drop the file in later and it simply appears - nothing here to change. */
+document.querySelectorAll('.headshot img').forEach(function (img) {
+  img.addEventListener('error', function () { img.classList.add('is-missing'); });
+  if (img.complete && img.naturalWidth === 0) { img.classList.add('is-missing'); }
+});
+
+/* Hairline and soft shadow under the header once the page is scrolled. */
+var header = document.querySelector('.site-header');
+function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 8); }
+addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+</script>
+
+</body>
+</html>
